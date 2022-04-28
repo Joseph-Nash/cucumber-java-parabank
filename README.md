@@ -19,4 +19,4 @@ This runs Cucumber features with the TestNG reporting framework. Reports can be 
 
     open target/surefire-reports/emailable-report.html
 
-Thread.sleep(x seconds) has been added throughout to make it clearer what is being entered and clicked via the webdriver.
+Thread.sleep(x milliseconds) has been added throughout to make it clearer what is being entered and clicked via the webdriver.
