@@ -9,13 +9,12 @@ Git:
     git clone https://github.com/Joseph-Nash/cucumber-java-parabank.git
     cd cucumber-java-parabank
 
-## Use Maven
+## Running the Tests
 
 Open a command line and run
 
     mvn test
 
-This runs Cucumber features with the TestNG reporting framework. Reports can be accessed by entering the command below 
-the terminal.
+This runs Cucumber features with the TestNG reporting framework. Reports can be accessed by entering the following in a command line.
 
     open target/surefire-reports/emailable-report.html
