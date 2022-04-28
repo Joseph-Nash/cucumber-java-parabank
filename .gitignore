@@ -1,7 +1,13 @@
 # Compiled class file
 *.class
 
+# repo specific
 *mvnw
+*.idea
+*.DS_Store
+*target
+LICENCE
+mvnw.cmd
 
 # Log file
 *.log
@@ -20,9 +26,6 @@
 *.zip
 *.tar.gz
 *.rar
-
-*.idea
-*.DS_Store
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
