@@ -25,11 +25,23 @@ public class StepDefinitions {
 
     private String savedUserAndPassword = "";
     private String savedSSN = "";
+    private double initBalance = 0.00;
+    private double minBalance = 0.00;
 
     @Given("The Parabank website is opened")
     public void The_Parabank_website_is_opened() {
         //Open parabank homepage
         wd.get("https://parabank.parasoft.com/parabank/index.htm");
+    }
+
+    @Given("The Parabank website is opened and initial balance is checked")
+    public void The_Parabank_website_is_opened_and_initial_balance_is_checked() {
+        The_Parabank_website_is_opened();
+        wd.findElement(By.linkText("Admin Page")).click();
+        WebElement we = wd.findElement(By.id("initialBalance"));
+        WebElement we2 = wd.findElement(By.id("minimumBalance"));
+        initBalance = Double.parseDouble(we.getAttribute("value"));
+        minBalance = Double.parseDouble(we2.getAttribute("value"));
     }
 
     @When("I register with a new user")
@@ -116,7 +128,7 @@ public class StepDefinitions {
         WebElement savingsAccount = wd.findElement(By.id("accountType"));
         WebElement balance = wd.findElement(By.id("balance"));
         assertEquals(savingsAccount.getText(), "SAVINGS");
-        assertEquals(balance.getText(), "$100.00");
+        assertEquals(balance.getText(), "$" + String.format("%.2f", minBalance));
     }
 
     @Then("The Account Overview is correct")
@@ -132,7 +144,7 @@ public class StepDefinitions {
         WebElement checkingAccount = wd.findElement(By.id("accountType"));
         WebElement balanceChecking = wd.findElement(By.id("balance"));
         assertEquals(checkingAccount.getText(), "CHECKING");
-        assertEquals(balanceChecking.getText(), "$415.50");
+        assertEquals(balanceChecking.getText(), "$" + String.format("%.2f", initBalance-minBalance));
     }
 
     @When("I transfer {string} from one account to another")
@@ -165,8 +177,8 @@ public class StepDefinitions {
         // WebElements are created to check the correct amounts are in each account
         WebElement balance1 = wd.findElement(By.xpath("//div[3]//tr[1]//td[2]"));
         WebElement balance2 = wd.findElement(By.xpath("//div[3]//tr[2]//td[2]"));
-        assertEquals(balance1.getText(), "$373.50");
-        assertEquals(balance2.getText(), "$142.00");
+        assertEquals(balance1.getText(), "$" + String.format("%.2f", initBalance-minBalance-42));
+        assertEquals(balance2.getText(), "$" + String.format("%.2f", minBalance+42));
 
     }
 

@@ -10,16 +10,14 @@ Feature: Parabank
     When I register an empty user
     Then Error messages should be present
 
-  Scenario: exploratory test the login fields
-
   Scenario: Open a savings account
-    Given The Parabank website is opened
+    Given The Parabank website is opened and initial balance is checked
     When I register with a new user
     And I open a new savings account
     Then The Account Overview is correct
 
   Scenario: Transfer funds
-    Given The Parabank website is opened
+    Given The Parabank website is opened and initial balance is checked
     When I register with a new user
     And I open a new savings account
     And I transfer "42.00" from one account to another
