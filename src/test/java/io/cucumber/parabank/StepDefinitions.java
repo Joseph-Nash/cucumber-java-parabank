@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.Instant;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -35,8 +36,8 @@ public class StepDefinitions {
     public void I_login_with_a_unique_user() throws InterruptedException {
         // Click on Register hyperlink
         wd.findElement(By.linkText("Register")).click();
-        // Create a random number to help create a unique user
-        int r = (int)(Math.random()*1000000);
+        // Use epoch time to create a unique account
+        long time = Instant.now().getEpochSecond();
 
         //Fill in details to register
         wd.findElement(By.id("customer.firstName")).sendKeys("first");
@@ -45,18 +46,18 @@ public class StepDefinitions {
         wd.findElement(By.id("customer.address.city")).sendKeys("Cardiff");
         wd.findElement(By.id("customer.address.state")).sendKeys("Vale of Glamorgan");
         wd.findElement(By.id("customer.address.zipCode")).sendKeys("CF14 3UZ");
-        // SSN is set to randomly generated number
-        wd.findElement(By.id("customer.ssn")).sendKeys(String.valueOf(r));
+        // SSN is set to epoch time
+        wd.findElement(By.id("customer.ssn")).sendKeys(String.valueOf(time));
         Thread.sleep(500);
-        // username and password are set to "j" + random number
-        wd.findElement(By.id("customer.username")).sendKeys("j" + r);
-        savedUserAndPassword = "j" + r;
+        // username and password are set to "j" + epoch time
+        wd.findElement(By.id("customer.username")).sendKeys("j" + time);
+        savedUserAndPassword = "j" + time;
         // SSN is saved as a variable to be used when retrieving forgotten details
-        savedSSN =String.valueOf(r);
+        savedSSN =String.valueOf(time);
         Thread.sleep(500);
-        wd.findElement(By.id("customer.password")).sendKeys("j" + r);
+        wd.findElement(By.id("customer.password")).sendKeys("j" + time);
         Thread.sleep(500);
-        wd.findElement(By.id("repeatedPassword")).sendKeys("j" + r);
+        wd.findElement(By.id("repeatedPassword")).sendKeys("j" + time);
         Thread.sleep(500);
         // Click Register button
         wd.findElement(By.xpath("//input[@value=\"Register\"]")).click();
