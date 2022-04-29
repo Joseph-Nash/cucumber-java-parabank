@@ -1,6 +1,7 @@
 # Cucumber-Java Parabank
 
 Parabank test suite was written using JDK11
+Uses Cucumber framework with Selenium webdriver (Chrome).
 
 ## Get the code
 
