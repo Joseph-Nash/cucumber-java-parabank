@@ -40,6 +40,8 @@ public class StepDefinitions {
         wd.findElement(By.linkText("Admin Page")).click();
         WebElement we = wd.findElement(By.id("initialBalance"));
         WebElement we2 = wd.findElement(By.id("minimumBalance"));
+        // Save initial and minimum balance needed for future use in tests
+        // Values are currently subject to change via the Admin Page and so it is unreliable to hard code values.
         initBalance = Double.parseDouble(we.getAttribute("value"));
         minBalance = Double.parseDouble(we2.getAttribute("value"));
     }
